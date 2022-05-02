@@ -8,26 +8,20 @@ import pandas as pd
 #import glob
 #import os
 
-#read_path = 'D:\Rdata\\finialtxt'      # Òª¶ÁÈ¡µÄÎÄ¼ş¼ĞµÄµØÖ·
+
 df = pd.read_csv('D:\Rdata\\finialtxt\Acyrthosiphon_pisum.clean.all.copynumber.csv.txt', \
 keep_default_na=False,delimiter='\t')
-# In[45]:
-
-
-
-#df=df.fillna(0)#Ìî³äNA
-
 
 # In[46]:
 
 
-df['Family']= df.apply(lambda x: x.Family[5:] if x.Family.startswith('Type')else x.Family,axis=1)#È¥µôtype
+df['Family']= df.apply(lambda x: x.Family[5:] if x.Family.startswith('Type')else x.Family,axis=1)#å»æ‰type
 
 
 # In[52]:
 
 
-df1 = df.groupby('Family')['Copies'].sum()#·Ö×é¾ÛºÏ
+df1 = df.groupby('Family')['Copies'].sum()#åˆ†ç»„èšåˆ
 
 
 # In[56]:
@@ -40,8 +34,8 @@ df1.to_csv('Apres.csv',index=True)
 
 
 df2 = pd.read_csv('Apres.csv')
-df2['Family']=df2.apply(lambda x: x.Family.split('/')[0],axis=1)#½Ø¶Ï×Ö·û´®È¡/Ç°ÃæµÄ
-df2['Family']=df2.apply(lambda x: x.Family.split('?')[0],axis=1)#½Ø¶Ï×Ö·û´®È¡£¿Ç°ÃæµÄ
+df2['Family']=df2.apply(lambda x: x.Family.split('/')[0],axis=1)#æˆªæ–­å­—ç¬¦ä¸²å–/å‰é¢çš„
+df2['Family']=df2.apply(lambda x: x.Family.split('?')[0],axis=1)#æˆªæ–­å­—ç¬¦ä¸²å–ï¼Ÿå‰é¢çš„
 df3 = df2.groupby('Family')['Copies'].sum()
 
 
